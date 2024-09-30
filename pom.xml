@@ -92,7 +92,22 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version> <!-- Версия плагина -->
+				<configuration>
+					<source>17</source> <!-- Версия исходного кода Java -->
+					<target>17</target> <!-- Версия целевого байт-кода Java -->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+
+
+
+
+
 
 </project>
