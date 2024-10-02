@@ -43,16 +43,12 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
+        return new JdbcUserDetailsManager(dataSource);
+    }
 
-        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-        manager.setUsersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?");
-        manager.setAuthoritiesByUsernameQuery(
-                "SELECT u.username, r.name FROM user_roles ur " +
-                        "JOIN users u ON ur.user_id = u.id " +
-                        "JOIN roles r ON ur.role_id = r.id WHERE u.username = ?");
-        return manager;
-
-        /*InMemoryUserDetailsManager imudm = new InMemoryUserDetailsManager();
+    /*@Bean
+    public UserDetailsService userDetailsService() {
+        InMemoryUserDetailsManager imudm = new InMemoryUserDetailsManager();
 
         imudm.createUser(User.withUsername("admin").password("{noop}admin").roles("ADMIN").build());
 
@@ -77,10 +73,8 @@ public class SecurityConfig {
         imudm.createUser(User.withUsername("user9").password("{noop}user").roles("USER").build());
         imudm.createUser(User.withUsername("user10").password("{noop}user").roles("USER").build());
 
-        return imudm;*/
-
-
-    }
+        return imudm;
+    }*/
      /*@Bean
    public PasswordEncoder passwordEncoder() {
        return new BCrypt PasswordEncoder();
